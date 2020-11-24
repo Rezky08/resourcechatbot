@@ -43,10 +43,10 @@
             <table class="table text-center">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Text</th>
-                        <th>Label</th>
-                        <th>Action</th>
+                        <th width='10%'>No</th>
+                        <th width='40%'>Text</th>
+                        <th width='40%'>Label</th>
+                        <th width='10%'>Action</th>
                     </tr>
                 </thead>
                 <tbody>
