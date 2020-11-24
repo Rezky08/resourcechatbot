@@ -35,14 +35,14 @@
                     {{-- End Search Box --}}
 
                     <div id="chat-list" class="overflow-auto d-none d-md-block collapse" style="max-height: 25em">
-                        @for ($i = 0; $i < 100; $i++)
+                        @foreach ($users as $user)
                             <a href="#" class="text-reset text-decoration-none">
                                 <div class="block my-1">
-                                    <span>Name</span>
-                                    <p class="font-weight-light">Last Chat</p>
+                                    <span>{{ $user->name }}</span>
+                                    <p class="font-weight-light">{{ $user->chat->last()->chat_text }}</p>
                                 </div>
                             </a>
-                        @endfor
+                        @endforeach
                     </div>
                     <button class="d-block d-md-none btn btn-block" data-toggle="collapse" data-target="#chat-list">
                         <i class="fa fa-chevron-down"></i>
@@ -50,39 +50,24 @@
                 </div>
                 <div class="col-md-9 bg-light p-0">
                     <div class="overflow-auto" style="max-height: 30em">
-                        <table class="table table-light">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Id</th>
-                                    <th>Text</th>
-                                    <th>Reply</th>
-                                    <th>Predict Label</th>
-                                    <th>Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($chats as $key => $chat)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $chat->id }}</td>
-                                        <td>{{ $chat->chat_text }}</td>
-                                        <td>{{ $chat->chat_label }}</td>
-                                        <td>{{ $chat->created_at }}</td>
-                                    </tr>
-                                @endforeach
-                                @for ($i = 0; $i < 15; $i++)
-                                    <tr>
-                                        <td>{{ $i + 1 }}</td>
-                                        <td>{{ rand() }}</td>
-                                        <td>{{ rand() }}</td>
-                                        <td>{{ rand() }}</td>
-                                        <td>{{ rand() }}</td>
-                                        <td>{{ rand() }}</td>
-                                    </tr>
-                                @endfor
-                            </tbody>
-                        </table>
+                        @for ($i = 0; $i < 10; $i++)
+                            <div class="row mx-3 justify-content-end">
+                                <div class="col">
+                                </div>
+                                <div class="col-auto">
+                                    <div class="row justify-content-end">
+                                        <div class="col-auto bg-info rounded-pill my-2 p-3 px-4 text-white">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, aliquam vel
+                                            libero, saepe cum facere dolore eos exercitationem voluptates omnis nulla quod
+                                            veniam architecto recusandae incidunt consequuntur, ad ab? Enim!
+                                        </div>
+                                    </div>
+
+                                    <span class="badge badge-pill badge-primary">test</span>
+                                    <small class="text-muted">{!! NOW() !!}</small>
+                                </div>
+                            </div>
+                        @endfor
                     </div>
                 </div>
             </div>
