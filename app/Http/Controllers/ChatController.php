@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chat;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
     private $chat_model;
+    private $user_model;
     function __construct()
     {
         $this->chat_model = new Chat();
+        $this->user_model = new User();
     }
     /**
      * Display a listing of the resource.
@@ -19,9 +22,10 @@ class ChatController extends Controller
      */
     public function index()
     {
-        $chats = $this->chat_model->all();
+        // $chats = $this->chat_model->all();
+        $users = $this->user_model->all();
         $data=[
-            'chats'=>$chats
+            'users'=>$users
         ];
         return view('chats.chat',$data);
     }
