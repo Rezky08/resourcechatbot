@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\AnswerImport;
 use App\Models\Answer;
+use App\Models\Label;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -13,10 +14,13 @@ class AnswerController extends Controller
 {
     private $answer_model;
     private $page_name;
+    private $label_model;
     function __construct()
     {
         $this->page_name = "Answer";
         $this->answer_model = new Answer();
+        $this->label_model = new Label();
+
     }
     /**
      * Display a listing of the resource.
@@ -104,6 +108,9 @@ class AnswerController extends Controller
         $insert_data = $file_test->map(function ($item,$index) use ($labels)
         {
             $label = $labels->where('label_name',$item[1])->first();
+            if (!$label) {
+                return $label;
+            }
             $item = [
                 'answer_text' => $item[0],
                 'label_id' => $label->id

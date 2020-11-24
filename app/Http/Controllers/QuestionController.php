@@ -104,8 +104,21 @@ class QuestionController extends Controller
             return redirect()->back()->with($response);
         }
         $file_test = Excel::toCollection(new QuestionImport,$request->file('import_data'))->first();
+        $labels_new = $file_test->pluck(1)->unique()->flatten();
+        $labels = $this->label_model->all()->pluck('label_name')->toArray();
+        $labels_new = $labels_new->diff($labels)->toArray();
+        if ($labels_new) {
+            $insert_label_data = [];
+            foreach ($labels_new as $value) {
+                $insert_label_data[] = [
+                    'label_name'    =>  $value,
+                    'created_at'    =>  new \DateTime
+                ];
+            }
+            $this->label_model->insert($insert_label_data);
+        }
         $labels = $this->label_model->all();
-        $insert_data = $file_test->map(function ($item,$index) use ($labels)
+        $insert_data = $file_test->map(function ($item) use ($labels)
         {
             $label = $labels->where('label_name',$item[1])->first();
             $item = [
