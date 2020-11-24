@@ -38,4 +38,10 @@ Route::group(['prefix' => 'question'], function () {
 });
 Route::group(['prefix' => 'answer'], function () {
     Route::get('/','AnswerController@index');
+    Route::get('/add', 'AnswerController@create');
+    Route::post('/add', 'AnswerController@store');
+    Route::get('/edit/{id}', 'AnswerController@edit');
+    Route::put('/edit/{id}', 'AnswerController@update');
+    Route::delete('/delete/{id}','AnswerController@destroy');
+    Route::post('/import','AnswerController@importExcel');
 });
