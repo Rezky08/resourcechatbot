@@ -20,12 +20,25 @@ class ChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // $chats = $this->chat_model->all();
         $users = $this->user_model->all();
+
+        if ($request->user_id){
+            $chats = $users->find($request->user_id);
+        }else{
+            $chats = $users->first();
+        }
+
+        if($chats){
+            $chats = $chats->chat;
+        }else{
+            $chats = [];
+        }
         $data=[
-            'users'=>$users
+            'users' =>   $users,
+            'chats' =>   $chats
         ];
         return view('chats.chat',$data);
     }
