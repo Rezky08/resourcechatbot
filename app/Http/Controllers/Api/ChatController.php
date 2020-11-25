@@ -3,20 +3,24 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\UserController;
 use App\Models\Chat;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ChatController extends Controller
 {
     private $chat_model;
     private $user_model;
+    private $user_controller;
     function __construct()
     {
         $this->chat_model = new Chat();
         $this->user_model = new User();
+        $this->user_controller = new UserController();
     }
     /**
      * Display a listing of the resource.
@@ -37,22 +41,46 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate User
         $rules = [
-            'user_id' => ['exists:users,id,deleted_at,NULL','filled','required','numeric'],
-            'chat_text' => ['filled','required']
+            'user_id' => ['required','filled']
         ];
         $validator = Validator::make($request->all(),$rules);
+        if($validator->fails()){
+            $response = [
+                'message' => $validator->errors()->messages()
+            ];
+            return response()->json($response, 400);
+        }
+        $user = $this->user_model->where('user_id',$request->user_id)->first();
+        if(!$user){
+            $res = $this->user_controller->add_user($request->except('text'));
+
+            if($res !== true){
+                $response = [
+                    'message' => "user not valid"
+                ];
+                return response()->json($response, 200);
+            }
+            $user = $this->user_model->where('user_id',$request->user_id)->first();
+        }
+        // End Validate User
+
+        $rules = [
+            'user_id' => ['filled','required','exists:users,id,deleted_at,NULL'],
+            'text' => ['filled','required']
+        ];
+        $insert_data = [
+            'user_id' => $user->id,
+            'text' => $request->text,
+            'created_at' => new \DateTime
+        ];
+        $validator = Validator::make($insert_data,$rules);
         if ($validator->fails()) {
             return response()->json($validator->errors()->messages(),400);
         }
         try {
-            $insert_data = [
-                'user_id' => $request->user_id,
-                'chat_text' => $request->chat_text,
-                'created_at' => new \DateTime
-            ];
             $this->chat_model->insert($insert_data);
-
             $response = [
                 'message' => 'insert data success'
             ];
