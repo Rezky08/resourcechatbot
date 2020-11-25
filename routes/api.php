@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/user','Api\LoginController@store')->name('login');
+Route::post('/register','Api\RegisterController@store');
 
 Route::group(['prefix' => '/chat'], function () {
     Route::get('/','Api\ChatController@index');
