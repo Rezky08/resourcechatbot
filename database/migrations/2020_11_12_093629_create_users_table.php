@@ -15,9 +15,10 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100)->nullable();
-            $table->string('username', 100)->nullable();
-            $table->string('roomchat_id', 100)->nullable();
+            $table->string('user_id', 100);
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('username');
             $table->timestamps();
             $table->softDeletes();
         });
