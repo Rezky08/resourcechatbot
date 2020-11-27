@@ -23,7 +23,6 @@
     </div>
 @endsection
 @section('script')
-
 <script>
     function updateMobileClass(screenSize, target) {
         if (screenSize < 765) {

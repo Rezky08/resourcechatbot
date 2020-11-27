@@ -79,6 +79,7 @@
     </div>
 @endsection
 @section('script')
+@parent
     <script>
         function statusSet(element, from, to) {
             if (element.classList.contains(from)) {
