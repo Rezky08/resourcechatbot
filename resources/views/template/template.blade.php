@@ -3,10 +3,10 @@
 @include('template.sidebar')
 <!DOCTYPE html>
 <html>
-<header>
+<head>
     @section('header')
     @show
-</header>
+</head>
 
 <body class="bg-light">
 

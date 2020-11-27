@@ -22,6 +22,7 @@
         </div>
     </div>
 @endsection
+@section('script')
 
 <script>
     function updateMobileClass(screenSize, target) {
@@ -44,3 +45,4 @@
     })
 
 </script>
+@endsection
