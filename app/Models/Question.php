@@ -11,6 +11,8 @@ class Question extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable =['question_text','label_id'];
+    protected $hidden=['deleted_at','updated_at'];
+
     public function Label()
     {
         return $this->belongsTo(Label::class, 'label_id', 'id');

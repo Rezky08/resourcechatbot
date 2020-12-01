@@ -24,3 +24,10 @@ Route::group(['prefix' => '/chat'], function () {
     Route::get('/','Api\ChatController@index');
     Route::post('/','Api\ChatController@store');
 });
+
+Route::group(['prefix' => 'question'], function () {
+    Route::get('/','Api\QuestionController@index');
+});
+Route::group(['prefix' => 'answer'], function () {
+    Route::get('/','Api\AnswerController@index');
+});

@@ -45,3 +45,7 @@ Route::group(['prefix' => 'answer'], function () {
     Route::delete('/delete/{id}','AnswerController@destroy');
     Route::post('/import','AnswerController@importExcel');
 });
+Route::group(['prefix' => 'chatbot'], function () {
+    Route::get('/','TrainChatbotController@index');
+    Route::post('/','TrainChatbotController@store');
+});

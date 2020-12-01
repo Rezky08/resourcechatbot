@@ -10,6 +10,8 @@ class Label extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $hidden=['deleted_at','updated_at'];
+
     public function Question()
     {
         return $this->hasMany(Question::class, 'label_id', 'id');

@@ -123,7 +123,8 @@ class QuestionController extends Controller
             $label = $labels->where('label_name',$item[1])->first();
             $item = [
                 'question_text' => $item[0],
-                'label_id' => $label->id
+                'label_id' => $label->id,
+                'created_at' =>  new \DateTime
             ];
             return $item;
         })->toArray();

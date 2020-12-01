@@ -113,7 +113,8 @@ class AnswerController extends Controller
             }
             $item = [
                 'answer_text' => $item[0],
-                'label_id' => $label->id
+                'label_id' => $label->id,
+                'created_at' =>  new \DateTime
             ];
             return $item;
         })->toArray();

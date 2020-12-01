@@ -16,6 +16,7 @@
                     <li><a href="{{ url('/label') }}" class="text-decoration-none text-reset">labels</a></li>
                     <li><a href="{{ url('/question', []) }}" class="text-decoration-none text-reset">Questions</a></li>
                     <li><a href="{{ url('/answer', []) }}" class="text-decoration-none text-reset">Answers</a></li>
+                    <li><a href="{{ url('/chatbot', []) }}" class="text-decoration-none text-reset">Chatbot</a></li>
                 </ul>
             </aside>
 
