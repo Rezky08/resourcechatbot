@@ -54,7 +54,7 @@ class ChatController extends Controller
         }
         $user = $this->user_model->where('user_id',$request->user_id)->first();
         if(!$user){
-            $res = $this->user_controller->add_user($request->except('text'));
+            $res = $this->user_controller->add_user($request->except(['text','update_id']));
 
             if($res !== true){
                 $response = [
@@ -68,11 +68,13 @@ class ChatController extends Controller
 
         $rules = [
             'user_id' => ['filled','required','exists:users,id,deleted_at,NULL'],
+            'update_id' => ['filled','required'],
             'text' => ['filled','required']
         ];
         $insert_data = [
             'user_id' => $user->id,
             'text' => $request->text,
+            'update_id' => $request->update_id,
             'created_at' => new \DateTime
         ];
         $validator = Validator::make($insert_data,$rules);
