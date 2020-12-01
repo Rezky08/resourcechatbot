@@ -15,7 +15,7 @@
         <div class="col-md-3 text-center">
             <div class="card border-0 shadow">
                 <div class="card-body">
-                    <span class="h2 font-weight-bold d-block">49k</span>
+                    <span class="h2 font-weight-bold d-block">{{$users->count()}}</span>
                     <span class="h5 font-weight-light text-muted d-block">Users</span>
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <div class="col-md-3 text-center">
             <div class="card border-0 shadow">
                 <div class="card-body">
-                    <span class="h2 font-weight-bold d-block">49k</span>
+                    <span class="h2 font-weight-bold d-block">{{$chats->count()}}</span>
                     <span class="h5 font-weight-light text-muted d-block">Chat Inbox</span>
                 </div>
             </div>
@@ -31,7 +31,7 @@
         <div class="col-md-3 text-center">
             <div class="card border-0 shadow">
                 <div class="card-body">
-                    <span class="h2 font-weight-bold d-block">49k</span>
+                    <span class="h2 font-weight-bold d-block">{{$questions->count()}}</span>
                     <span class="h5 font-weight-light text-muted d-block">Question</span>
                 </div>
             </div>
@@ -39,7 +39,7 @@
         <div class="col-md-3 text-center">
             <div class="card border-0 shadow">
                 <div class="card-body">
-                    <span class="h2 font-weight-bold d-block">49k</span>
+                    <span class="h2 font-weight-bold d-block">{{$answers->count()}}</span>
                     <span class="h5 font-weight-light text-muted d-block">Answer</span>
                 </div>
             </div>

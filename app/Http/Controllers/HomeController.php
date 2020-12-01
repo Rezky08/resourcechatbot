@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
+use App\Models\Chat;
+use App\Models\Question;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    private $user_model,$chat_model,$question_model,$answer_model;
+    function __construct()
+    {
+        $this->user_model = new User();
+        $this->chat_model = new Chat();
+        $this->question_model = new Question();
+        $this->answer_model = new Answer();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        return view('home');
+        $users = $this->user_model->all();
+        $chats = $this->chat_model->all();
+        $questions = $this->question_model->all();
+        $answers = $this->answer_model->all();
+        $data = [
+            'users'=>$users,
+            'chats'=>$chats,
+            'questions'=>$questions,
+            'answers'=>$answers
+        ];
+        return view('home',$data);
     }
 
     /**
