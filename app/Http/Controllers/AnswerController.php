@@ -119,7 +119,7 @@ class AnswerController extends Controller
             return $item;
         })->toArray();
         $rules = [
-            '*.answer_text' => ['required','unique:answers,answer_text,id,id,deleted_at,NULL'],
+            '*.answer_text' => ['required','unique:answers,answer_text,NULL,deleted_at'],
             '*.label_id' => ['required','exists:labels,id,deleted_at,NULL']
         ];
         $validateData = Validator::make($insert_data,$rules);
