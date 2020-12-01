@@ -129,7 +129,7 @@ class QuestionController extends Controller
             return $item;
         })->toArray();
         $rules = [
-            '*.question_text' => ['required','unique:questions,question_text,deleted_at,NULL'],
+            '*.question_text' => ['required','unique:questions,question_text,NULL,deleted_at'],
             '*.label_id' => ['required','exists:labels,id,deleted_at,NULL']
         ];
         $validateData = Validator::make($insert_data,$rules);
